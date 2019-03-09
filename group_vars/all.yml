@@ -1,8 +1,10 @@
-share_directory: /srv/
-allowed_clients:
-  - 192.168.0.80
-  - 192.168.0.81
-share_options:
-  - rw
-  - sync
-  - no_subtree_check
+share_directories:
+  - path: /srv/
+    options:
+      - rw
+      - sync
+      - no_subtree_check
+      - no_root_squash
+    allowed_clients:
+      - 192.168.0.80
+      - 192.168.0.81

@@ -14,11 +14,13 @@
   apt:
     name: ['nfs-kernel-server', 'nfs-common']
 
-- name: Create srv directory
+- name: Create share directories
   file:
-    path: "{{ share_directory }}"
+    path: "{{ item.path }}"
     state: directory
-    owner: nobody
+    owner: root
+    group: root
+  with_items: "{{ share_directories }}"
 
 - name: Create exports file
   template:

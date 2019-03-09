@@ -1,4 +1,7 @@
-{{ share_directory }} {% for client in allowed_clients %}
-{{ client }}(rw,sync,no_subtree_check)
-{%- if not loop.last %} {% endif %}
+{% for directory in share_directories %}
+{% set client_with_options = [] %}
+{% for client in directory.allowed_clients  %}
+{{ client_with_options.append( client +"(" + directory.options | join(",") + ")" ) }}
+{% endfor %}
+{{ directory.path }} {{ client_with_options | join(" ") }}
 {% endfor %}
