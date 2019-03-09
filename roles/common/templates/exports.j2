@@ -1,0 +1,4 @@
+{{ share_directory }} {% for client in allowed_clients %}
+{{ client }}(rw,sync,no_subtree_check)
+{%- if not loop.last %} {% endif %}
+{% endfor %}

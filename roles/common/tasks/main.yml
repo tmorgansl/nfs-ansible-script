@@ -1,0 +1,31 @@
+---
+- name: apt-get update
+  apt:
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+    cache_valid_time: 86400
+
+- name: apt-get upgrade
+  apt:
+    upgrade: full
+
+- name: Install nfs server
+  apt:
+    name: ['nfs-kernel-server', 'nfs-common']
+
+- name: Create srv directory
+  file:
+    path: "{{ share_directory }}"
+    state: directory
+    owner: nobody
+
+- name: Create exports file
+  template:
+    src: exports.j2
+    dest: /etc/exports
+
+- name: Restart nfs server
+  service:
+    name: nfs-kernel-server
+    state: restarted
