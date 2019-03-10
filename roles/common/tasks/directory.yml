@@ -1,0 +1,14 @@
+- name: Create share directories
+  file:
+    path: "{{ directory.path }}"
+    state: directory
+    owner: root
+    group: root
+
+- name: Mount disk
+  mount:
+    path: '{{ directory.path }}'
+    src: '{{ directory.remote_disk.id }}'
+    fstype: '{{ directory.remote_disk.filetype }}'
+    state: mounted
+  when: directory.should_mount

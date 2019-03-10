@@ -14,12 +14,8 @@
   apt:
     name: ['nfs-kernel-server', 'nfs-common']
 
-- name: Create share directories
-  file:
-    path: "{{ item.path }}"
-    state: directory
-    owner: root
-    group: root
+- name: Iterate through directories
+  include: directory.yml directory={{ item }}
   with_items: "{{ share_directories }}"
 
 - name: Create exports file

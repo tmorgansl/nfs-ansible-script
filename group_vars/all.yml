@@ -8,3 +8,7 @@ share_directories:
     allowed_clients:
       - 192.168.0.80
       - 192.168.0.81
+    should_mount: True
+    remote_disk:
+      id: /dev/sda1
+      filetype: ext4
